@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1056388577583",
+    "project_id": "app-gestion-financiere",
+    "storage_bucket": "app-gestion-financiere.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056388577583:android:5e824c5dc02faabd0fc9da",
+        "android_client_info": {
+          "package_name": "org.m2i.app_gestion_financiere"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdq89MiMC_JB0fdJnFtQSEC7ZQdw31BJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
