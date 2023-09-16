@@ -13,7 +13,7 @@ import org.m2i.app_gestion_financiere.model.Budget
 import org.m2i.app_gestion_financiere.repository.BudgetRepository
 import javax.inject.Inject
 
-@HiltViewModel
+//@HiltViewModel
 class BudgetViewModel @Inject constructor(private val repository: BudgetRepository) : ViewModel() {
     private val _budgetsList = MutableStateFlow<List<Budget>>(emptyList())
     val budgetList = _budgetsList.asStateFlow()

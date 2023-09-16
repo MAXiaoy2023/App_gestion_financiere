@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,9 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 import org.m2i.app_gestion_financiere.navigation.GFNavigation
 import org.m2i.app_gestion_financiere.ui.theme.App_gestion_financiereTheme
 
+//@AndroidEntryPoint
 class MainActivity : ComponentActivity()
 {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +40,6 @@ class MainActivity : ComponentActivity()
                     }*/
                 GFApp()
             }
-
         }
     }
 }
@@ -52,7 +54,6 @@ fun GFApp() {
         }
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable

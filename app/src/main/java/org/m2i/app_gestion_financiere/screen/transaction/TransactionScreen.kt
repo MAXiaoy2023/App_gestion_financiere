@@ -1,18 +1,16 @@
 package org.m2i.app_gestion_financiere.screen.transaction
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
@@ -31,9 +29,8 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
@@ -42,17 +39,27 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
+import org.m2i.app_gestion_financiere.components.MonthPicker
 import org.m2i.app_gestion_financiere.components.TransactionRow
-import org.m2i.app_gestion_financiere.data.TransactionDataSource
-import org.m2i.app_gestion_financiere.model.Transaction
+import org.m2i.app_gestion_financiere.data.transaction.TransactionDataSource
 import org.m2i.app_gestion_financiere.navigation.GFScreens
+import java.util.Calendar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TransactionScreen(
-    navController: NavController
-) {
+fun TransactionScreen(navController: NavController) {
+
+    var visible by remember {
+        mutableStateOf(true)
+    }
+
+    var date by remember {
+        mutableStateOf("")
+    }
+
+    val currentMonth = Calendar.getInstance().get(Calendar.MONTH)
+    val year = Calendar.getInstance().get(Calendar.YEAR)
+
     Scaffold(topBar = {
         CenterAlignedTopAppBar(title = {
             Text(
@@ -119,6 +126,7 @@ fun TransactionScreen(
                 )
             }
         })
+
     { paddingValues ->
         Column(
             modifier = Modifier
@@ -191,6 +199,32 @@ fun TransactionScreen(
                 }
             }
 
+
+            // Calender
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                MonthPicker(
+                    visible = visible,
+                    currentMonth = currentMonth,
+                    currentYear = year,
+                    confirmButtonCLicked = { month_, year_ ->
+                        date = "$month_/$year_"
+                        visible = false
+                    },
+                    cancelClicked = {
+                        visible = false
+                    }
+                )
+
+                Text(
+                    text = date,
+                    modifier = Modifier
+                        .clickable { visible = true }
+                )}
+
+
             Surface(
                 modifier = Modifier
                     .width(400.dp)
@@ -249,31 +283,26 @@ fun TransactionScreen(
                                 textAlign = TextAlign.Center
                             )
                         }
-
                     }
+
                     LazyColumn {
-                        items(TransactionDataSource().listTransactions()) { transaction ->
+                        items(TransactionDataSource().listTransactions()) { transaction ->  // todo
                             TransactionRow(transaction = transaction)
                         }
                     }
                 }
-
-
-                }
+            }
 
         Button(colors = ButtonDefaults.buttonColors(Color(0xFF9579C6)),
             onClick = { navController.navigate(GFScreens.AjouterTransactionScreen.name) }) {
-            Text(text = "Ajouter une transaction")
+                Text(text = "Ajouter une transaction")
+            }
         }
-        }
-
     }
 }
 
-
-
-/*@Preview
+@Preview
 @Composable
 fun TransactionScreenPreview(){
     TransactionScreen(navController = NavController(LocalContext.current))
-}*/
+}

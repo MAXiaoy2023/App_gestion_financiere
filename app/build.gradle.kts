@@ -54,6 +54,7 @@ android {
 }
 
 dependencies {
+    implementation("androidx.appcompat:appcompat:1.6.1")
     val room_version = "2.5.2"
     // Room
     implementation("androidx.room:room-runtime:$room_version")
@@ -110,6 +111,11 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    implementation("com.google.accompanist:accompanist-flowlayout:0.27.0")
+
+    var lifecycle_version = "2.2.0"
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
 }
 
 // Allow references to generated code

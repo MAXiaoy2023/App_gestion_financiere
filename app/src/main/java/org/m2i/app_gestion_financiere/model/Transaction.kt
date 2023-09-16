@@ -17,5 +17,7 @@ data class Transaction(
     @ColumnInfo(name = "transaction_category" )
     val category: String,
     @ColumnInfo(name = "transaction_amount" )
-    val amount: String
+    val amount: String,
+    @ColumnInfo(name = "transaction_date" )
+    val date: String?
 )

@@ -1,6 +1,8 @@
 package org.m2i.app_gestion_financiere.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -14,11 +16,13 @@ import org.m2i.app_gestion_financiere.screen.home.HomeScreen
 import org.m2i.app_gestion_financiere.screen.home.InscriptionScreen
 import org.m2i.app_gestion_financiere.screen.transaction.AjouterTransactionScreen
 import org.m2i.app_gestion_financiere.screen.transaction.TransactionScreen
-
+import org.m2i.app_gestion_financiere.screen.transaction.TransactionViewModel
 
 @Composable
 fun GFNavigation() {
     val navController = rememberNavController()
+    //val viewModel : TransactionViewModel = viewModel()  // TODO à vérifier
+
     NavHost(navController = navController, startDestination = GFScreens.SplashScreen.name) {
 
         composable(GFScreens.SplashScreen.name){
@@ -42,6 +46,7 @@ fun GFNavigation() {
         }
 
         composable(GFScreens.AjouterTransactionScreen.name){
+            //AjouterTransactionScreen(navController = navController, viewModel = viewModel)
             AjouterTransactionScreen(navController = navController)
         }
 
